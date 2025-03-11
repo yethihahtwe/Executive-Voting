@@ -113,8 +113,9 @@ MySQL/PostgreSQL
 
 ### Database Schema
 
-The application uses the following database structure
+The application uses the following database structure.
 
+```
 erDiagram
     ORGANIZATION {
         int id PK
@@ -193,6 +194,7 @@ erDiagram
     ELECTION ||--o{ VOTE : "contains"
     VOTER ||--o{ VOTE : "casts"
     ELECTION ||--o{ VOTER : "participates in"
+```
 
 **Organizations**  
 Core member organizations eligible for representation
