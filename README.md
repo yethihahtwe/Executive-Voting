@@ -115,7 +115,7 @@ MySQL/PostgreSQL
 
 The application uses the following database structure.
 
-```
+```mermaid
 erDiagram
     ORGANIZATION {
         int id PK
