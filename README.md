@@ -186,6 +186,18 @@ erDiagram
         timestamp created_at
     }
     
+    VOTER_SESSION {
+        int id PK
+        int voter_id FK
+        string session_id
+        string device_info
+        string ip_address
+        datetime last_activity
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
+    }
+    
     ORGANIZATION ||--o{ REPRESENTATIVE : "has"
     ORGANIZATION ||--o{ VOTER : "belongs to"
     ELECTION ||--o{ POSITION : "has"
@@ -194,6 +206,7 @@ erDiagram
     ELECTION ||--o{ VOTE : "contains"
     VOTER ||--o{ VOTE : "casts"
     ELECTION ||--o{ VOTER : "participates in"
+    VOTER ||--o{ VOTER_SESSION : "has"
 ```
 
 **Organizations**  
