@@ -43,7 +43,7 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\FilamentInfoWidget::class,
             ])
             ->renderHook(PanelsRenderHook::SIMPLE_PAGE_START, function () {
-                return Blade::render('<div><img src="' . asset('storage/images/logo.png') . '" /></div>');
+                return Blade::render("<div class='flex justify-center mb-2'><img src='" . asset('storage/images/logo.png') . "' /></div>");
             })
             ->middleware([
                 EncryptCookies::class,
