@@ -240,6 +240,12 @@ class VotingController extends Controller
         $activePosition = Position::where('election_id', $activeElection->id)
             ->where('is_active', true)
             ->first();
+
+        $completedPositions = Position::where('election_id', $activeElection->id)
+            ->where('is_completed', true)
+            ->with('electedRepresentative.organization')
+            ->get();
+
         return view('voting.confirmation');
     }
 
