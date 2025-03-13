@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Election;
+use App\Models\Position;
 use App\Models\Representative;
 use App\Models\Voter;
 use App\Models\VoterSession;
@@ -16,9 +17,9 @@ class VotingController extends Controller
     {
         // Check if there's an active election
         $activeElection = Election::where('is_active', true)
-        ->where('start_date', '<=', now())
-        ->where('end_date', '>=', now())
-        ->first();
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->first();
 
         // If no active election right now, show no active election page
         if (!$activeElection) {
@@ -74,14 +75,26 @@ class VotingController extends Controller
                 'last_activity' => now(),
                 'is_active' => true
             ]
-            );
+        );
 
-        // Then return to ballots
-        return redirect()->route('vote.ballot', $voter->id);
+        // The election is then active, but we still need to check if there is an active position vote
+        $activePosition = Position::where('election_id', $election->id)
+            ->where('is_active', true)
+            ->first();
+
+        // If there is not active position vote even when the election is active, redirect the user back
+        if (!$activePosition) {
+            return back()->withErrors([
+                'position' => 'There is no active position for voting at this time.'
+            ]);
+        }
+
+        // The user is verified and there is an active position in this stage, can go to ballots page now for this active position
+        return redirect()->route('vote.ballot', [$voter->id, $activePosition->id]);
     }
 
-    // Show the voting ballots to the voter
-    public function showBallot(Voter $voter)
+    // Show the voting ballots for a particular position to the voter
+    public function showBallot(Voter $voter, Position $position)
     {
         // Check if there is an active session
         $session = self::checkActiveSession($voter);
@@ -91,15 +104,21 @@ class VotingController extends Controller
 
         // Get details of the election for display
         $election = $voter->election;
-        // Get positions offered by the election
-        $positions = $election->positions;
+
+        // Making sure the position currently visited by the voter is active and belongs to the current election.
+        if (!$position->is_active || $position->election_id != $election->id) {
+            return redirect()->route('vote.index')
+                ->withErrors(['position' => 'This position is not currently available for this election.']);
+        }
+
+        // TO CHECK IF THE VOTER HAS ALREADY VOTED FOR THIS POSITION
 
         // Get eligible representatives
         // Organizations are eager loaded to make sure 5 executives were from different organizations
         $representatives = Representative::whereHas('organization')
-        ->with('organization')
-        ->get()
-        ->groupBy('organization_id');
+            ->with('organization')
+            ->get()
+            ->groupBy('organization_id');
 
         return view('voting.ballot', [
             'voter' => $voter,
@@ -110,24 +129,26 @@ class VotingController extends Controller
     }
 
     // Processing the vote submitted by the user
-    public function submitVote(Request $request, Voter $voter) {
+    public function submitVote(Request $request, Voter $voter)
+    {
         // Check if there is an active session
         $session = self::checkActiveSession($voter);
     }
 
     // Reusable function to check active session and redirect if not
-    protected function checkActiveSession(Voter $voter) {
+    protected function checkActiveSession(Voter $voter)
+    {
         // Ensure if there is an active session
         $session = VoterSession::where('voter_id', $voter->id)
-        ->where('is_active', true)
-        // the session will expire after 30 minutes of inactivity
-        ->where('last_activity', '>=', now()->subMinutes(30))
-        ->first();
+            ->where('is_active', true)
+            // the session will expire after 30 minutes of inactivity
+            ->where('last_activity', '>=', now()->subMinutes(30))
+            ->first();
 
         // If there is no active session, redirect to voter verification page
         if (!$session) {
             return redirect()->route('vote.index')
-            ->withErrors(['session' => 'Your session has expired. Please verify your voter ID again.']);
+                ->withErrors(['session' => 'Your session has expired. Please verify your voter ID again.']);
         }
         return $session;
     }
