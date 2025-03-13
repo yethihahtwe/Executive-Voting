@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('description')->nullable();
             $table->foreignId('election_id')->constrained('elections')->cascadeOnDelete();
+            $table->boolean('is_active')->default(false);
+            $table->boolean('is_completed')->default(false);
+            $table->foreignId('elected_representative_id')->nullable()->constrained('representatives');
             $table->timestamps();
         });
     }

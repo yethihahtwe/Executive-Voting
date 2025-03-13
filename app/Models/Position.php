@@ -11,7 +11,10 @@ class Position extends Model
     protected $fillable = [
         'title',
         'description',
-        'election_id'
+        'election_id',
+        'is_active',
+        'is_completed',
+        'elected_representative_id',
     ];
 
     // A position has its parent election
@@ -25,4 +28,18 @@ class Position extends Model
     {
         return $this->hasMany(Vote::class);
     }
+
+    // A position has its own elected representative
+    public function electedRepresentative(): BelongsTo
+    {
+        return $this->belongsTo(Representative::class);
+    }
 }
+
+
+//            $table->string('title');
+ //           $table->string('description')->nullable();
+//            $table->foreignId('election_id')->constrained('elections')->cascadeOnDelete();
+//            $table->boolean('is_active')->default(false);
+//            $table->boolean('is_completed')->default(false);
+//            $table->foreignId('elected_representative_id')->nullable()->constrained('representatives');
