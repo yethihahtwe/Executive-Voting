@@ -129,7 +129,7 @@ class VotingController extends Controller
         // Making sure the position currently visited by the voter is active and belongs to the current election.
         self::checkActivePosition($position, $election);
 
-        // Check if the voter has already voted for this position
+        // Check if the voter has already voted for this position and redirect if voted
         self::checkPositionVoted($voter, $position);
 
         // Get elected representatives
