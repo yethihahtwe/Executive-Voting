@@ -22,6 +22,7 @@ class VotingController extends Controller
     public function __construct(ElectionService $electionService, PositionService $positionService)
     {
         $this->electionService = $electionService;
+        $this->positionService = $positionService;
     }
 
     // Voter verification form
@@ -35,9 +36,20 @@ class VotingController extends Controller
             return view('voting.no-active-election');
         }
 
+        // Check if there is an active position for voting
+        $activePosition = $this->positionService->getActivePosition();
+
+        // If there is not active position, redirect back
+        if (!$activePosition) {
+            return view('voting.no-active-position', [
+                'election' => $activeElection,
+            ]);
+        }
+
         // show voter verification page if there is an active election
         return view('voting.index', [
-            'election' => $activeElection
+            'election' => $activeElection,
+            'activePosition' => $activePosition,
         ]);
     }
 
