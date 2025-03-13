@@ -12,12 +12,14 @@ use Illuminate\Http\Request;
 use App\Models\Representative;
 use Illuminate\Support\Facades\DB;
 use App\Services\Utils\ElectionService;
+use App\Services\Utils\PositionService;
 
 class VotingController extends Controller
 {
     protected $electionService;
+    protected $positionService;
 
-    public function __construct(ElectionService $electionService)
+    public function __construct(ElectionService $electionService, PositionService $positionService)
     {
         $this->electionService = $electionService;
     }
