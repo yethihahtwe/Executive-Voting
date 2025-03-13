@@ -117,7 +117,7 @@ class VotingController extends Controller
     // Show the voting ballots for a particular position to the voter
     public function showBallot(Voter $voter, Position $position)
     {
-        // Check if there is an active session
+        // Check if there is an active session and redirect back
         $session = self::checkActiveSession($voter);
 
         // If there's an active session, extend the last active timestamp
