@@ -228,8 +228,18 @@ class VotingController extends Controller
 
 
     // Show voting confirmation page
-    public function confirmation()
+    public function confirmation(Request $request)
     {
+        // Get active election
+        $activeElection = $this->electionService->getActiveElection();
+
+        if (!$activeElection) {
+            return view('voting.confirmation');
+        }
+
+        $activePosition = Position::where('election_id', $activeElection->id)
+            ->where('is_active', true)
+            ->first();
         return view('voting.confirmation');
     }
 
