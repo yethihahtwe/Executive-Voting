@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Election;
-use App\Models\Position;
-use App\Models\Representative;
 use App\Models\Vote;
 use App\Models\Voter;
+use App\Models\Election;
+use App\Models\Position;
+use Illuminate\Support\Str;
 use App\Models\VoterSession;
 use Illuminate\Http\Request;
+use App\Models\Representative;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use App\Services\Utils\ElectionService;
 
 class VotingController extends Controller
