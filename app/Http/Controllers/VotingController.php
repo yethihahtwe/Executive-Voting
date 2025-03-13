@@ -14,6 +14,13 @@ use Illuminate\Support\Str;
 
 class VotingController extends Controller
 {
+    protected $electionService;
+
+                                public function __construct(ElectionService $electionService)
+    {
+        $this->electionService = $electionService;
+    }
+
     // Voter verification form
     public function index()
     {
