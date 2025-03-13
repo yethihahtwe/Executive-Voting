@@ -16,7 +16,7 @@ class VotingController extends Controller
 {
     protected $electionService;
 
-                                public function __construct(ElectionService $electionService)
+    public function __construct(ElectionService $electionService)
     {
         $this->electionService = $electionService;
     }
@@ -25,10 +25,7 @@ class VotingController extends Controller
     public function index()
     {
         // Check if there's an active election
-        $activeElection = Election::where('is_active', true)
-            ->where('start_date', '<=', now())
-            ->where('end_date', '>=', now())
-            ->first();
+        $activeElection = $this->electionService->getActiveElection();
 
         // If no active election right now, show no active election page
         if (!$activeElection) {
