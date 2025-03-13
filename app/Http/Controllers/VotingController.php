@@ -246,7 +246,11 @@ class VotingController extends Controller
             ->with('electedRepresentative.organization')
             ->get();
 
-        return view('voting.confirmation');
+        return view('voting.confirmation', [
+            'election' => $activeElection,
+            'activePosition' => $activePosition,
+            'completePositions' => $completedPositions
+        ]);
     }
 
     // Reusable function to check active session and redirect if not
