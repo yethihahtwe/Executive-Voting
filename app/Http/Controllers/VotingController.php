@@ -11,6 +11,7 @@ use App\Models\VoterSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Services\ElectionService;
 
 class VotingController extends Controller
 {
