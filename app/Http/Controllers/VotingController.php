@@ -37,7 +37,7 @@ class VotingController extends Controller
         }
 
         // Check if there is an active position for voting
-        $activePosition = $this->positionService->getActivePosition();
+        $activePosition = $this->positionService->getActivePosition($activeElection);
 
         // If there is not active position, redirect back
         if (!$activePosition) {

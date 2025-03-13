@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ElectionResource\Pages;
 use App\Filament\Resources\ElectionResource\RelationManagers;
 use App\Models\Election;
+use App\Services\Components\AppIcons;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,7 +18,9 @@ class ElectionResource extends Resource
 {
     protected static ?string $model = Election::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = AppIcons::ELECTION_ICON;
+
+    protected static ?string $navigationGroup = 'Voting Settings';
 
     public static function form(Form $form): Form
     {

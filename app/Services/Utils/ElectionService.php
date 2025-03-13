@@ -6,7 +6,7 @@ use App\Models\Election;
 
 class ElectionService
 {
-    public function getActiveElection(): Election
+    public function getActiveElection(): Election|null
     {
         return Election::where('is_active', true)
             ->where('start_date', '<=', now())

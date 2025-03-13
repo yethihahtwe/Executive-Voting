@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <!-- Background shape -->
+  <rect x="5" y="5" width="70" height="70" rx="6" fill="none" stroke="#f8fafc" stroke-width="1" />
+  
+  <!-- Finer grid pattern with white stroke -->
+  <!-- Horizontal lines -->
+  <line x1="10" y1="15" x2="70" y2="15" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="10" y1="15" x2="70" y2="15" stroke="#475569" stroke-width="1.2" />
+  
+  <line x1="10" y1="25" x2="70" y2="25" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="10" y1="25" x2="70" y2="25" stroke="#475569" stroke-width="1.2" />
+  
+  <line x1="10" y1="35" x2="70" y2="35" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="10" y1="35" x2="70" y2="35" stroke="#475569" stroke-width="1.2" />
+  
+  <line x1="10" y1="45" x2="70" y2="45" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="10" y1="45" x2="70" y2="45" stroke="#475569" stroke-width="1.2" />
+  
+  <line x1="10" y1="55" x2="70" y2="55" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="10" y1="55" x2="70" y2="55" stroke="#475569" stroke-width="1.2" />
+  
+  <line x1="10" y1="65" x2="70" y2="65" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="10" y1="65" x2="70" y2="65" stroke="#475569" stroke-width="1.2" />
+  
+  <!-- Vertical lines -->
+  <line x1="15" y1="10" x2="15" y2="70" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="15" y1="10" x2="15" y2="70" stroke="#475569" stroke-width="1.2" />
+  
+  <line x1="25" y1="10" x2="25" y2="70" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="25" y1="10" x2="25" y2="70" stroke="#475569" stroke-width="1.2" />
+  
+  <line x1="35" y1="10" x2="35" y2="70" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="35" y1="10" x2="35" y2="70" stroke="#475569" stroke-width="1.2" />
+  
+  <line x1="45" y1="10" x2="45" y2="70" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="45" y1="10" x2="45" y2="70" stroke="#475569" stroke-width="1.2" />
+  
+  <line x1="55" y1="10" x2="55" y2="70" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="55" y1="10" x2="55" y2="70" stroke="#475569" stroke-width="1.2" />
+  
+  <line x1="65" y1="10" x2="65" y2="70" stroke="#f8fafc" stroke-width="2.2" />
+  <line x1="65" y1="10" x2="65" y2="70" stroke="#475569" stroke-width="1.2" />
+  
+  <!-- Dots in a checkmark pattern (not connected) -->
+  <!-- First part of checkmark -->
+  <circle cx="25" cy="45" r="2.5" fill="#f8fafc" stroke="#475569" stroke-width="0.8" />
+  <circle cx="35" cy="55" r="2.5" fill="#f8fafc" stroke="#475569" stroke-width="0.8" />
+  
+  <!-- Second part of checkmark (longer) -->
+  <circle cx="45" cy="45" r="2.5" fill="#f8fafc" stroke="#475569" stroke-width="0.8" />
+  <circle cx="55" cy="35" r="2.5" fill="#f8fafc" stroke="#475569" stroke-width="0.8" />
+  <circle cx="65" cy="25" r="2.5" fill="#f8fafc" stroke="#475569" stroke-width="0.8" />
+  
+  <!-- Extra dots at key grid intersections -->
+  <circle cx="15" cy="15" r="1.8" fill="#f8fafc" stroke="#475569" stroke-width="0.6" />
+  <circle cx="65" cy="65" r="1.8" fill="#f8fafc" stroke="#475569" stroke-width="0.6" />
+  <circle cx="15" cy="65" r="1.8" fill="#f8fafc" stroke="#475569" stroke-width="0.6" />
+  <circle cx="65" cy="15" r="1.8" fill="#f8fafc" stroke="#475569" stroke-width="0.6" />
+</svg>
