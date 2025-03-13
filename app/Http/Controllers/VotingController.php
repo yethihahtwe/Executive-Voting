@@ -249,7 +249,7 @@ class VotingController extends Controller
         return view('voting.confirmation', [
             'election' => $activeElection,
             'activePosition' => $activePosition,
-            'completePositions' => $completedPositions
+            'completedPositions' => $completedPositions
         ]);
     }
 
