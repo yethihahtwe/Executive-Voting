@@ -40,6 +40,42 @@ class ResultsController extends Controller
             return redirect()->route('results.index')
                 ->with('error', 'Results are not available for this election yet');
         }
+
+        // Get results for each position
+        $results = $this->getElectionResults($election);
+
+        // Total vote count
+        $voterCount = $election->voters()->count();
+        $votedCount = $election->voters()->where('has_voted', true)->count();
+
+        // Get the view
+        return view('results.show', [
+            'election' => $election,
+            'results' => $results,
+            'voterCount' => $voterCount,
+            'votedCount' => $votedCount,
+            'participationRate' => $voterCount > 0 ? ($votedCount / $voterCount) * 100 : 0
+        ]);
+    }
+
+    /*
+ * Get realtime results
+ * */
+    public function liveResults(Election $election)
+    {
+        // For HTMX requests, return partial view with latest results
+        if (!$election->is_active && !$election->is_completed) {
+            return response('Election results not available', 403);
+        }
+
+        // Get results
+        $results = $this->getElectionResults($election);
+
+        // Return partial view with results for HTMX to update
+        return view('results.partials.live-results', [
+            'election' => $election,
+            'results' => $results
+        ]);
     }
 
     // Get election results
@@ -66,6 +102,7 @@ class ResultsController extends Controller
                     'representatives.name as representative_name',
                     'organizations.id as organization_id',
                     'organizations.name as organization_name',
+                    'organizations.abbreviation as organization_abbreviation',
                     DB::raw('COUNT(*) as vote_count')
                 )
                 ->where('votes.position_id', $position->id)
@@ -76,7 +113,8 @@ class ResultsController extends Controller
                     'representatives.id',
                     'representatives.name',
                     'organizations.id',
-                    'organizations.name'
+                    'organizations.name',
+                    'organizations.abbreviation'
                 )
                 ->orderByDesc('vote_count')
                 ->get();
@@ -92,6 +130,7 @@ class ResultsController extends Controller
                     'organization' => $result->organization_id ? (object)[
                         'id' => $result->organization_id,
                         'name' => $result->organization_name,
+                        'abbreviation' => $result->organization_abbreviation
                     ] : null,
                     'vote_count' => $result->vote_count,
                 ];
@@ -108,7 +147,8 @@ class ResultsController extends Controller
                     ->select(
                         'representatives.*',
                         'organizations.id as organization_id',
-                        'organizations.name as organization_name'
+                        'organizations.name as organization_name',
+                        'organizations.abbreviation as organization_abbreviation'
                     )
                     ->leftJoin('organizations', 'representatives.organization_id', '=', 'organizations.id')
                     ->where('representatives.id', $position->elected_representative_id)

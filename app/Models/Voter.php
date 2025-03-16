@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Voter extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'voter_id',
         'organization_id',
@@ -43,5 +45,16 @@ class Voter extends Model
     public function sessions(): HasMany
     {
         return $this->hasMany(VoterSession::class);
+    }
+    
+    /**
+     * Verify if the provided ID matches this voter's ID
+     *
+     * @param string $voterId
+     * @return bool
+     */
+    public function verifyId(string $voterId): bool
+    {
+        return $this->voter_id === $voterId;
     }
 }
