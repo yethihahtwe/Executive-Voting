@@ -8,6 +8,8 @@ use App\Models\Election;
 use App\Services\Components\AppIcons;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -32,13 +34,38 @@ class ElectionResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
                 Forms\Components\DateTimePicker::make('start_date')
-                    ->required(),
+                    ->label('Start date and time')
+                    ->required()
+                    ->native(false)
+                    ->timezone('Asia/Bangkok')
+                    ->placeholder('Election start date and time')
+                    ->live()
+                    ->afterStateUpdated(fn(Set $set) => $set('end_date', null)),
                 Forms\Components\DateTimePicker::make('end_date')
-                    ->required(),
+                    ->label('End date and time')
+                    ->required()
+                    ->native(false)
+                    ->timezone('Asia/Bangkok')
+                    ->placeholder('Election end date and time')
+                    ->minDate(fn(Get $get) => $get('start_date')),
                 Forms\Components\Toggle::make('is_active')
-                    ->required(),
+                    ->label('Is the election currently active?')
+                    ->required()
+                    ->live()
+                    ->afterStateUpdated(function (bool $state, Set $set) {
+                        if ($state == true) {
+                            $set('completed', false);
+                        }
+                    }),
                 Forms\Components\Toggle::make('completed')
-                    ->required(),
+                    ->label('Is the election completed?')
+                    ->required()
+                    ->live()
+                    ->afterStateUpdated(function (bool $state, Set $set) {
+                        if ($state == true) {
+                            $set('is_active', false);
+                        }
+                    }),
             ]);
     }
 
@@ -49,10 +76,10 @@ class ElectionResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('start_date')
-                    ->dateTime()
+                    ->dateTime('d-M-Y h:i A', 'Asia/Bangkok')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('end_date')
-                    ->dateTime()
+                    ->dateTime('d-M-Y h:i A', 'Asia/Bangkok')
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
@@ -71,7 +98,7 @@ class ElectionResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->successNotificationTitle('Election updated successfully.'),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

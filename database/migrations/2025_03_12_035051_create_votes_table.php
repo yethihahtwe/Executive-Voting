@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('position_id')->constrained('positions')->cascadeOnDelete();
             $table->foreignId('election_id')->constrained('elections')->cascadeOnDelete();
             $table->timestamps();
+            $table->unique(['voter_id', 'position_id']);
         });
     }
 

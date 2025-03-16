@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Election extends Model
 {
-    protected $fillable= [
+    protected $fillable = [
         'title',
         'description',
         'start_date',
@@ -16,7 +16,7 @@ class Election extends Model
         'completed'
     ];
 
-    protected $casts=[
+    protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',
         'is_active' => 'boolean',

@@ -11,12 +11,6 @@ class Representative extends Model
     protected $fillable = [
         'organization_id',
         'name',
-        'position',
-        'is_elected'
-    ];
-
-    protected $casts = [
-        'is_elected' => 'boolean',
     ];
 
     // A representative has their parent organization

@@ -7,7 +7,10 @@ use App\Filament\Resources\PositionResource\RelationManagers;
 use App\Models\Position;
 use App\Services\Components\AppIcons;
 use Filament\Forms;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -33,7 +36,39 @@ class PositionResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Select::make('election_id')
                     ->relationship('election', 'title')
-                    ->required(),
+                    ->required()
+                    ->columnSpanFull(),
+
+                Toggle::make('is_active')
+                    ->label('Is the position active?')
+                    ->live()
+                    ->afterStateUpdated(function (bool $state, Set $set) {
+                        if ($state == true) {
+                            $set('is_completed', false);
+                            $set('elected_representative_id', null);
+                        }
+                    }),
+                Toggle::make('is_completed')
+                    ->label('Is the position elected?')
+                    ->live()
+                    ->afterStateUpdated(function (bool $state, Set $set) {
+                        if ($state == true) {
+                            $set('is_active', false);
+                        }
+                    }),
+                Forms\Components\Select::make('elected_representative_id')
+                    ->label('Elected Representative')
+                    ->relationship('electedRepresentative', 'name')
+                    ->required(fn(Get $get): bool => $get('is_completed') == true)
+                    ->live()
+                    ->disabled(fn(Get $get): bool => $get('is_completed') == false)
+                    ->dehydrated(fn(Get $get): bool => $get('is_completed') == true)
+                    ->afterStateUpdated(function ($state, Set $set) {
+                        if ($state !== null) {
+                            $set('is_active', false);
+                            $set('is_completed', true);
+                        }
+                    }),
             ]);
     }
 
@@ -61,7 +96,7 @@ class PositionResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->successNotificationTitle('Position updated successfully.'),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

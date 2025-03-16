@@ -33,8 +33,8 @@ class Vote extends Model
     }
 
     // A vote is related to a particular election
-    public function election(): BelongsTo{
+    public function election(): BelongsTo
+    {
         return $this->belongsTo(Election::class);
     }
-
 }

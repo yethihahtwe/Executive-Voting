@@ -14,7 +14,10 @@
 
         <p class="text-gray-600 mb-6">
             There is currently no active election or position available for voting.
-            Please check back later or contact the Election Commission for more information.
+            Please check back later or contact the Election Commission for more information.<br /><br />
+
+            လက်တလောကျင်းပနေသည့် ရွေးကောက်ပွဲမရှိသေးပါ။ သို့မဟုတ် ရွေးကောက်တင်မြှောက်ရန် ကိုယ်စားလှယ်များမရှိသေးပါ။
+            နောက်မှ ဤစာမျက်နှာကို ဖွင့်ပေးပါ။ သို့မဟုတ် ရွေးကောက်ပွဲကော်မရှင်သို့ ဆက်သွယ်မေးမြန်းပါ။
         </p>
 
         <div class="mt-6">

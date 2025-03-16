@@ -8,6 +8,8 @@ use App\Models\Representative;
 use App\Services\Components\AppIcons;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -32,10 +34,6 @@ class RepresentativeResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('position')
-                    ->maxLength(255),
-                Forms\Components\Toggle::make('is_elected')
-                    ->required(),
             ]);
     }
 
@@ -65,7 +63,7 @@ class RepresentativeResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->successNotificationTitle('Representative updated successfully.'),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

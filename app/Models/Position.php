@@ -35,11 +35,3 @@ class Position extends Model
         return $this->belongsTo(Representative::class);
     }
 }
-
-
-//            $table->string('title');
- //           $table->string('description')->nullable();
-//            $table->foreignId('election_id')->constrained('elections')->cascadeOnDelete();
-//            $table->boolean('is_active')->default(false);
-//            $table->boolean('is_completed')->default(false);
-//            $table->foreignId('elected_representative_id')->nullable()->constrained('representatives');

@@ -11,25 +11,14 @@ use App\Models\VoterSession;
 use Illuminate\Http\Request;
 use App\Models\Representative;
 use Illuminate\Support\Facades\DB;
-use App\Services\Utils\ElectionService;
-use App\Services\Utils\PositionService;
 
 class VotingController extends Controller
 {
-    protected $electionService;
-    protected $positionService;
-
-    public function __construct(ElectionService $electionService, PositionService $positionService)
-    {
-        $this->electionService = $electionService;
-        $this->positionService = $positionService;
-    }
-
     // Voter verification form
     public function index()
     {
         // Check if there's an active election
-        $activeElection = $this->electionService->getActiveElection();
+        $activeElection = self::getActiveElection();
 
         // If no active election right now, show no active election page
         if (!$activeElection) {
@@ -37,15 +26,13 @@ class VotingController extends Controller
         }
 
         // Check if there is an active position for voting
-        $activePosition = $this->positionService->getActivePosition($activeElection);
-
+        $activePosition = self::getActivePosition($activeElection);
         // If there is not active position, redirect back
         if (!$activePosition) {
             return view('voting.no-active-position', [
                 'election' => $activeElection,
             ]);
         }
-
         // show voter verification page if there is an active election
         return view('voting.index', [
             'election' => $activeElection,
@@ -107,6 +94,18 @@ class VotingController extends Controller
         if (!$activePosition) {
             return back()->withErrors([
                 'position' => 'There is no active position for voting at this time.'
+            ]);
+        }
+        // The voter has active election and an active position so far
+        // Check if the user has voted for this position
+        $hasVotedforThisPosition = Vote::where('voter_id', $voter->id)
+            ->where('position_id', $activePosition->id)
+            ->exists();
+
+        // If the user has voted for this position, show error
+        if ($hasVotedforThisPosition) {
+            return back()->withErrors([
+                'voter_id' => 'You have already voted for this position'
             ]);
         }
 
@@ -226,12 +225,11 @@ class VotingController extends Controller
         }
     }
 
-
     // Show voting confirmation page
     public function confirmation(Request $request)
     {
         // Get active election
-        $activeElection = $this->electionService->getActiveElection();
+        $activeElection = self::getActiveElection();
 
         if (!$activeElection) {
             return view('voting.confirmation');
@@ -251,6 +249,24 @@ class VotingController extends Controller
             'activePosition' => $activePosition,
             'completedPositions' => $completedPositions
         ]);
+    }
+
+    // check if there is an active election
+
+    protected function getActiveElection(): Election|null
+    {
+        return Election::where('is_active', true)
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->first();
+    }
+
+    // Check if there is an active position
+    protected function getActivePosition($activeElection)
+    {
+        return Position::where('election_id', $activeElection->id)
+            ->where('is_active', true)
+            ->first();
     }
 
     // Reusable function to check active session and redirect if not

@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('organization_id')->constrained('organizations')->cascadeOnDelete();
             $table->string('name');
-            $table->string('position')->nullable();
-            $table->boolean('is_elected')->default(false);
             $table->timestamps();
         });
     }

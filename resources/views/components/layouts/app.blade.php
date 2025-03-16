@@ -1,3 +1,10 @@
+@props([
+'title' => null,
+'header' => null,
+'start_date' => null,
+'end_date' => null,
+'election' => null,
+])
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,10 +27,10 @@
         <main>
             @if(isset($election))
             <div class="mb-8 text-center">
-                <h1 class="text-3xl font-bold mb-2">{{ $election->title }}</h1>
+                <h1 class="text-3xl font-bold mb-2">{{ $title }}</h1>
                 <p class="text-gray-600">
-                    {{ \Carbon\Carbon::parse($election->start_date)->format('M d, Y') }} -
-                    {{ \Carbon\Carbon::parse($election->end_date)->format('M d, Y') }}
+                    {{ \Carbon\Carbon::parse($start_date)->format('M d, Y') }} -
+                    {{ \Carbon\Carbon::parse($end_date)->format('M d, Y') }}
                 </p>
             </div>
             @elseif(isset($header))

@@ -8,6 +8,7 @@ use App\Models\Voter;
 use App\Services\Components\AppIcons;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,16 +28,33 @@ class VoterResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('voter_id')
                     ->required()
+                    ->label('Voter ID')
+                    ->helperText('Enter a unique voter ID')
+                    ->unique()
                     ->maxLength(255),
                 Forms\Components\Select::make('organization_id')
                     ->relationship('organization', 'name')
-                    ->required(),
+                    ->required()
+                    ->placeholder('Please select organization')
+                    ->searchable()
+                    ->preload()
+                    ->native(false),
                 Forms\Components\Select::make('election_id')
                     ->relationship('election', 'title')
-                    ->required(),
+                    ->required()
+                    ->columnSpanFull()
+                    ->native(false),
                 Forms\Components\Toggle::make('has_voted')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('voted_at'),
+                    ->inline(false)
+                    ->inlineLabel(false)
+                    ->label('Has the user voted?')
+                    ->helperText('When a voter wanted to undo the vote, toggle off this.')
+                    ->required()
+                    ->live()
+                    ->afterStateUpdated(fn(Set $set) => $set('voted_at', null)),
+                Forms\Components\DateTimePicker::make('voted_at')
+                    ->inlineLabel()
+                    ->disabled(),
             ]);
     }
 
@@ -70,7 +88,7 @@ class VoterResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->successNotificationTitle('Voter updated successfully.'),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

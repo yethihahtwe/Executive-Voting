@@ -13,7 +13,8 @@ class ManageElections extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->successNotificationTitle('Election successfully created.'),
         ];
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 // V O T I N G  R O U T E S
 Route::controller(VotingController::class)->group(function () {

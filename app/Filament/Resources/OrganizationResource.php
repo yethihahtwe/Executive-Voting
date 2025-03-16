@@ -56,7 +56,7 @@ class OrganizationResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->successNotificationTitle('Organization updated successfully.'),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
