@@ -19,6 +19,11 @@ class Position extends Model
         'elected_representative_id',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+        'is_completed' => 'boolean'
+    ];
+
     // A position has its parent election
     public function election(): BelongsTo
     {
