@@ -12,12 +12,11 @@
 
         <h2 class="text-2xl font-bold mb-4">No Active Election</h2>
 
-        <p class="text-gray-600 mb-6">
+        <p class="text-gray-600 mb-6 text-left">
             There is currently no active election or position available for voting.
             Please check back later or contact the Election Commission for more information.<br /><br />
 
-            လက်တလောကျင်းပနေသည့် ရွေးကောက်ပွဲမရှိသေးပါ။ သို့မဟုတ် ရွေးကောက်တင်မြှောက်ရန် ကိုယ်စားလှယ်များမရှိသေးပါ။
-            နောက်မှ ဤစာမျက်နှာကို ဖွင့်ပေးပါ။ သို့မဟုတ် ရွေးကောက်ပွဲကော်မရှင်သို့ ဆက်သွယ်မေးမြန်းပါ။
+လတ်တလော ရွေးကောက်ပွဲကျင်းပနေခြင်းမရှိသေးပါ။ (သို့မဟုတ်) ရွေးကောက်တင်မြှောက်ရန် ကိုယ်စားလှယ်များမရှိသေးပါ။ ယခုစာမျက်နှာကို များမကြာမီထပ်မံဖွင့်ကြည့်ပေးပါရန်၊ သို့မဟုတ် ရွေးကောက်ပွဲကော်မရှင်သို့ ဆက်သွယ်မေးမြန်းပေးပါရန် မေတ္တာရပ်ခံအပ်ပါသည်။
         </p>
 
         <div class="mt-6">

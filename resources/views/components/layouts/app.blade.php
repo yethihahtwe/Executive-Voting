@@ -27,7 +27,7 @@
         <main>
             @if(isset($election))
             <div class="mb-8 text-center">
-                <h1 class="text-3xl font-bold mb-2">{{ $title }}</h1>
+                <h1 class="text-3xl font-bold mb-2 text-center">{{ $title }}</h1>
                 <p class="text-gray-600">
                     {{ \Carbon\Carbon::parse($start_date)->format('M d, Y') }} -
                     {{ \Carbon\Carbon::parse($end_date)->format('M d, Y') }}

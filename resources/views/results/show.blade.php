@@ -1,20 +1,26 @@
 <x-layouts.app :title="$election->title . ' - Voting Results'" :header="$election->title">
-    <x-slot name="scripts">
-        <script>
-            // Poll for updates every 10 seconds
-            document.addEventListener("DOMContentLoaded", function () {
-                // This ensures we don't need to directly place HTMX in the partials
-                setTimeout(function () {
-                    const resultsContainer = document.getElementById('results-container');
-                    if (resultsContainer) {
-                        resultsContainer.setAttribute('hx-get', '{{ route("results.live", $election) }}');
-                        resultsContainer.setAttribute('hx-trigger', 'every 10s');
-                        resultsContainer.setAttribute('hx-swap', 'innerHTML');
+	<x-slot name="scripts">
+<script src="https://unpkg.com/htmx.org@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                const resultsContainer = document.getElementById('results-container');
+                if (resultsContainer) {
+                    resultsContainer.setAttribute('hx-get', '{{ route("results.live", $election) }}');
+                    resultsContainer.setAttribute('hx-trigger', 'every 10s');
+                    resultsContainer.setAttribute('hx-swap', 'innerHTML');
+                    
+                    // Tell HTMX to process the new attributes
+                    if (typeof htmx !== 'undefined') {
+                        htmx.process(resultsContainer);
+                    } else {
+                        console.error('HTMX is not defined. Check that it loaded properly.');
                     }
-                }, 1000);
-            });
-        </script>
-    </x-slot>
+                }
+            }, 1000);
+        });
+    </script>
+</x-slot>
 
     <div class="bg-white rounded-lg shadow-md p-6 mb-8">
         <h2 class="text-xl font-semibold mb-4">Voter Participation</h2>

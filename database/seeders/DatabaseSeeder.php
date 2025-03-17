@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             PositionSeeder::class,
             RepresentativeSeeder::class,
             VoterSeeder::class,
-            VoterSessionSeeder::class,
-            VoteSeeder::class,
+          //  VoterSessionSeeder::class,
+          //  VoteSeeder::class,
         ]);
     }
 }

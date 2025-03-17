@@ -3,7 +3,7 @@
     <x-slot:header>Executive Voting System</x-slot:header>
 
     <div class="max-w-3xl mx-auto text-center">
-        <p class="text-lg text-gray-600 mb-8">
+        <p class="text-lg text-gray-600 mb-8 text-left">
             Welcome to the Executive Voting System. This platform enables transparent, fair, and inclusive election
             processes for executive member positions.<br /><br />
             Executive Voting System မှကြိုဆိုပါတယ်။ မိမိတို့အဖွဲ့အစည်းအတွက် အမှုဆောင်အဖွဲ့ဝင်များ ရွေးကောက်တင်မြှောက်ခြင်းဆိုင်ရာ အွန်လိုင်းမဲပေးခြင်းလုပ်ငန်းအဆင့်ဆင့်ကို ပွင့်လင်းမြင်သာမှုရှိရှိ ပြုလုပ်နိုင်မည့် စနစ်ဖြစ်ပါတယ်။
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="bg-slate-50 border border-slate-200 rounded-lg p-6">
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
             <h2 class="text-xl font-bold text-slate-800 mb-3">About the Voting System</h2>
             <p class="text-slate-700">
                 This application ensures transparent, fair, and inclusive election processes. The five executive members

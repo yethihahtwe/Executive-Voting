@@ -69,16 +69,15 @@
 
             <div class="text-sm text-gray-700 space-y-3">
                 <ul class="list-disc pl-5 space-y-1">
-                    <li>Your Voter ID is unique and can be logged in on one device at a time.</li>
-                    <li>When the same voter ID is used to log in on a second device, it will display an error.</li>
-                    <li>To resolve this, complete your vote on original device or log out first.</li>
+                    <li>Your Voter ID is unique and can be used to vote only once per each position from an election.</li>
+                    <li>When the same voter ID is used to vote the same position from an election, it will display an error.</li>
+                    <li>Once a vote is submitted, it cannot be undone. Please make sure you check your ballot before submitting the vote.</li>
                 </ul>
             </div>
 
             <div class="mt-5 text-sm text-gray-700 pt-3 border-t border-blue-100">
                 <ul class="list-disc pl-5 space-y-1">
-                    <li>Voter ID သည် မဲပေးသူတိုင်းအတွက် သီးသန့်ပြုလုပ်ထားပြီး တစ်ကြိမ်လျှင် စက်ပစ္စည်းတစ်လုံးတွင်သာ
-                        ဝင်ရောက်မဲပေးနိုင်ပါသည်။</li>
+                    <li></li>
                     <li>Voter ID တစ်ခုကို စက်ပစ္စည်းတစ်လုံးထက်ပို၍ ဝင်ရောက်မိပါက error ပြပါလိမ့်မည်</li>
                     <li>Error ပြသည့်အခါ မူလစက်ပစ္စည်းတွင်ဆက်လက်မဲပေး၍ဖြစ်စေ၊ log out ထွက်၍
                         နောက်စက်တစ်လုံးတွင်ဆက်လက်မဲပေး၍ဖြစ်စေ ဖြေရှင်းနိုင်ပါသည်</li>
