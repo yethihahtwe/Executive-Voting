@@ -46,15 +46,18 @@ class ResultsController extends Controller
 
         // Total vote count
         $voterCount = $election->voters()->count();
+        $positionCount = $election->positions()->count();
+        $potentialVoteCount = $voterCount * $positionCount;
         $votedCount = $election->voters()->where('has_voted', true)->count();
+        $votedCount = $election->votes()->count();
 
         // Get the view
         return view('results.show', [
             'election' => $election,
             'results' => $results,
-            'voterCount' => $voterCount,
+            'potentialVoteCount' => $potentialVoteCount,
             'votedCount' => $votedCount,
-            'participationRate' => $voterCount > 0 ? ($votedCount / $voterCount) * 100 : 0
+            'participationRate' => $potentialVoteCount > 0 ? ($votedCount / $potentialVoteCount)  * 100 : 0
         ]);
     }
 

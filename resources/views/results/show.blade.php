@@ -40,8 +40,8 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-blue-50 p-4 rounded-lg">
-                <div class="text-3xl font-bold text-blue-700">{{ $voterCount }}</div>
-                <div class="text-sm text-gray-600">Total Eligible Voters</div>
+                <div class="text-3xl font-bold text-blue-700">{{ $potentialVoteCount }}</div>
+                <div class="text-sm text-gray-600">Total Eligible Votes</div>
             </div>
 
             <div class="bg-green-50 p-4 rounded-lg">
