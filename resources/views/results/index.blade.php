@@ -29,11 +29,11 @@
                 <div class="mt-2 text-sm text-gray-600">
                     <div>
                         <span class="font-medium">Start Date:</span>
-                        {{ \Carbon\Carbon::parse($activeElection->start_date)->format('M d, Y h:i A') }}
+                        {{ \Carbon\Carbon::parse($activeElection->start_date->setTimezone('Asia/Bangkok'))->format('M d, Y h:i A') }}
                     </div>
                     <div>
                         <span class="font-medium">End Date:</span>
-                        {{ \Carbon\Carbon::parse($activeElection->end_date)->format('M d, Y h:i A') }}
+                        {{ \Carbon\Carbon::parse($activeElection->end_date->setTimezone('Asia/Bangkok'))->format('M d, Y h:i A') }}
                     </div>
                 </div>
 
