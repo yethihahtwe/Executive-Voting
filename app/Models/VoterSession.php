@@ -19,7 +19,7 @@ class VoterSession extends Model
     ];
 
     protected $casts = [
-        'last-activity' => 'datetime',
+        'last_activity' => 'datetime',
         'is_active' => 'boolean',
     ];
 

@@ -47,7 +47,7 @@
                 </div>
             </form>
 
-            <div class="mt-8 pt-6 border-t border-gray-200 text-center">
+            <div class="mt-8 pt-6 border-t border-gray-200 text-left">
                 <p class="text-sm text-gray-500">
                     If you haven't received your voter ID, please contact the Election Commission.<br /><br />
                     မိမိ၏ voter ID မရရှိသေးပါက သက်ဆိုင်ရာ ရွေးကောက်ပွဲကော်မရှင်ထံဆက်သွယ်ပါ။
@@ -69,18 +69,23 @@
 
             <div class="text-sm text-gray-700 space-y-3">
                 <ul class="list-disc pl-5 space-y-1">
-                    <li>Your Voter ID is unique and can be used to vote only once per each position from an election.</li>
-                    <li>When the same voter ID is used to vote the same position from an election, it will display an error.</li>
-                    <li>Once a vote is submitted, it cannot be undone. Please make sure you check your ballot before submitting the vote.</li>
+                    <li>Your Voter ID is unique and can be used to vote only once per each position from an election.
+                    </li>
+                    <li>When the same voter ID is used to vote the same position from an election, it will display an
+                        error.</li>
+                    <li>Once a vote is submitted, it cannot be undone. Please make sure you check your ballot before
+                        submitting the vote.</li>
                 </ul>
             </div>
 
             <div class="mt-5 text-sm text-gray-700 pt-3 border-t border-blue-100">
                 <ul class="list-disc pl-5 space-y-1">
-                    <li></li>
-                    <li>Voter ID တစ်ခုကို စက်ပစ္စည်းတစ်လုံးထက်ပို၍ ဝင်ရောက်မိပါက error ပြပါလိမ့်မည်</li>
-                    <li>Error ပြသည့်အခါ မူလစက်ပစ္စည်းတွင်ဆက်လက်မဲပေး၍ဖြစ်စေ၊ log out ထွက်၍
-                        နောက်စက်တစ်လုံးတွင်ဆက်လက်မဲပေး၍ဖြစ်စေ ဖြေရှင်းနိုင်ပါသည်</li>
+                    <li>Voter ID သည် မဲပေးသူတစ်ဦးချင်းစီအတွက်သီးသန့်ဖြစ်ပါသည်။ ရွေးကောက်ပွဲအလိုက် ရာထူး/တာဝန်တစ်ခုအတွက်
+                        တစ်ကြိမ်သာမဲပေးခွင့်ရှိပါသည် </li>
+                    နောက်စက်တစ်လုံးတွင်ဆက်လက်မဲပေး၍ဖြစ်စေ ဖြေရှင်းနိုင်ပါသည်</li>
+                    <li>Voter ID တစ်ခုတည်းဖြင့် တစ်ကြိမ်ထက်ပိုမဲပေးခြင်း၊ Voter ID တစ်ခုတည်းကို စက်ပစ္စည်းတစ်လုံးထက်ပို၍
+                        ဝင်ရောက်မဲပေးခြင်းပြုမိလျှင် အချက်ပေးပါမည်။</li>
+                    <li>ဆန္ဒမဲပေးပြီးပါက ပြန်လည်ပြင်ဆင်၍မရနိုင်တော့ပါ။ မိမိဆန္ဒမဲများကို မဲမပေးခင်သေချာစွာစစ်ဆေးပါ။</li>
                 </ul>
             </div>
         </div>

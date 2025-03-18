@@ -1,8 +1,23 @@
 <x-layouts.app :title="'Election Results'" :header="'Executive Elections'">
     <div class="container mx-auto py-8 px-4">
-        <p class="text-center text-gray-600 mb-8">
-            View election results
-        </p>
+
+        <div class="flex items-center justify-between mb-8">
+            <p class="text-gray-600">
+                View election results
+            </p>
+            <div>
+                <a href="{{ route('home') }}"
+                    class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Return to Home
+                </a>
+            </div>
+        </div>
 
         @if($activeElection)
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -69,17 +84,5 @@
         </div>
         @endif
 
-        <!-- Return to Home button -->
-<div class="mt-8 text-center">
-            <a href="{{ route('home') }}"
-               class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-6 py-2 rounded-full shadow-sm">
-                <span class="flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                    </svg>
-                    Return to Home
-                </span>
-            </a>
-        </div>
     </div>
 </x-layouts.app>

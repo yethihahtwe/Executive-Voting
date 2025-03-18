@@ -51,10 +51,10 @@
         <table class="min-w-full bg-white border border-gray-200">
             <thead>
                 <tr>
-                    <th class="py-2 px-4 border-b text-left">Representative</th>
-                    <th class="py-2 px-4 border-b text-left">Organization</th>
-                    <th class="py-2 px-4 border-b text-right">Votes</th>
-                    <th class="py-2 px-4 border-b text-right">Percentage</th>
+                    <th class="py-2 px-4 border-b border-gray-400 text-left">Representative</th>
+                    <th class="py-2 px-4 border-b border-gray-400 text-left">Organization</th>
+                    <th class="py-2 px-4 border-b border-gray-400 text-right">Votes</th>
+                    <th class="py-2 px-4 border-b border-gray-400 text-right">Percentage</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,20 +62,20 @@
                 <tr
                     class="{{ ($positionData['is_completed'] && $positionData['elected_representative'] && $result['representative']->id == $positionData['elected_representative']->id) ? 'bg-green-50' : '' }}">
                     <td
-                        class="py-2 px-4 border-b {{ ($positionData['is_completed'] && $positionData['elected_representative'] && $result['representative']->id == $positionData['elected_representative']->id) ? 'font-semibold' : '' }}">
+                        class="py-2 px-4 border-b border-gray-400 {{ ($positionData['is_completed'] && $positionData['elected_representative'] && $result['representative']->id == $positionData['elected_representative']->id) ? 'font-semibold' : '' }}">
                         {{ $result['representative']->name }}
                         @if($positionData['is_completed'] && $positionData['elected_representative'] &&
                         $result['representative']->id == $positionData['elected_representative']->id)
                         <span class="ml-2 text-xs text-green-700">✓ Elected</span>
                         @endif
                     </td>
-                    <td class="py-2 px-4 border-b">
+                    <td class="py-2 px-4 border-b border-gray-400">
                         {{ $result['organization']->name }} ({{ $result['organization']->abbreviation }})
                     </td>
-                    <td class="py-2 px-4 border-b text-right">
+                    <td class="py-2 px-4 border-b text-right border-gray-400 ">
                         {{ $result['vote_count'] }}
                     </td>
-                    <td class="py-2 px-4 border-b text-right">
+                    <td class="py-2 px-4 border-b text-right border-gray-400 ">
                         @if($positionData['total_votes'] > 0)
                         {{ number_format(($result['vote_count'] / $positionData['total_votes']) * 100, 1) }}%
                         @else
@@ -116,7 +116,7 @@
         @endforeach
     </div>
     @elseif($positionData['is_active'])
-    <div class="text-center py-4 bg-gray-50 rounded-lg border">
+    <div class="text-center py-4 bg-gray-50 rounded-lg border border-zinc-400">
         <p class="text-gray-500">Voting in progress. No votes recorded yet.</p>
     </div>
     @elseif(!$positionData['is_completed'])

@@ -24,6 +24,10 @@ Route::controller(VotingController::class)->group(function () {
 
     // Confirmation page show to the voter
     Route::get('/vote/confirmation', 'confirmation')->name('vote.confirmation');
+
+    Route::get('/vote/{voter}/{position}/confirm', [VotingController::class, 'confirmVote'])->name('vote.confirm');
+
+    Route::get('/vote/cancel-confirm', [VotingController::class, 'cancelConfirm'])->name('vote.cancel-confirm');
 });
 
 // R E S U L T S  R O U T E S

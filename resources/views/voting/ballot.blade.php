@@ -45,7 +45,10 @@
             <div class="p-6">
                 <h2 class="text-lg font-semibold mb-4">Select One Representative</h2>
 
-                <form action="{{ route('vote.submit', [$voter->id, $position->id]) }}" method="POST">
+                <!-- Validation errors -->
+                <div id="vote-form-errors"></div>
+
+                <form id="vote-form" hx-include="this">
                     @csrf
 
                     @if($representatives->count() > 0)
@@ -73,8 +76,10 @@
                     </div>
 
                     <div class="mt-6 flex justify-end">
-                        <button type="submit"
-                            class="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded">
+                        <button type="button"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded"
+                            hx-get="{{ route('vote.confirm', [$voter->id, $position->id]) }}" hx-include="#vote-form"
+                            hx-target="#modal-container" hx-target-error="#vote-form-errors">
                             Submit Vote
                         </button>
                     </div>
@@ -87,4 +92,5 @@
             </div>
         </div>
     </div>
+    <div id="modal-container"></div>
 </x-layouts.app>

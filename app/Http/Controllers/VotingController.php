@@ -119,6 +119,11 @@ class VotingController extends Controller
         // Check if there is an active session and redirect back
         $session = self::checkActiveSession($voter);
 
+        // The session can either return a redirect response or a VoterSession
+        if ($session instanceof \Illuminate\Http\RedirectResponse) {
+            return $session;
+        }
+
         // If there's an active session, extend the last active timestamp
         $session->update(['last_activity' => now()]);
 
@@ -158,11 +163,47 @@ class VotingController extends Controller
         ]);
     }
 
+    // Show confirmation dialog
+    public function confirmVote(Request $request, Voter $voter, Position $position)
+    {
+        // Validate that a representative was selected
+        if (!$request->has('representative_id') || empty($request->representative_id)) {
+            return response()->view('voting.validation-error', [
+                'error' => 'Please select a representative before submitting your vote.'
+            ]);
+        }
+        // Check if the requested representative exists in the database
+        $representative = Representative::find($request->representative_id);
+        if (!$representative) {
+            return response()->view('voting.validation-error', [
+                'error' => 'The selected representative is invalid.'
+            ]);
+        }
+
+        return view('voting.confirm', [
+            'voter' => $voter,
+            'position' => $position,
+            'representativeId' => $request->representative_id
+        ]);
+    }
+
+    // Cancel confirmation (return empty response)
+    public function cancelConfirm()
+    {
+        return response('');
+    }
+
+
     // Processing the vote submitted by the user
     public function submitVote(Request $request, Voter $voter, Position $position)
     {
         // Check if there is an active session
         $session = self::checkActiveSession($voter);
+
+        // If $session is a redirect response, return it immediately
+        if ($session instanceof \Illuminate\Http\RedirectResponse) {
+            return $session;
+        }
 
         // Get details of the election
         $election = $voter->election;
